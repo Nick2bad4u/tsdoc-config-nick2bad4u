@@ -9,7 +9,10 @@ describe("tsdoc-config-nick2bad4u", () => {
 
         const config = JSON.parse(await readFile(configPath, "utf8")) as {
             readonly extends?: readonly string[];
-            readonly supportForTags?: Record<string, boolean>;
+            readonly noStandardTags?: boolean;
+            readonly tagDefinitions?: ReadonlyArray<{
+                readonly tagName: string;
+            }>;
         };
 
         expect(packageName).toBe("tsdoc-config-nick2bad4u");
@@ -17,7 +20,9 @@ describe("tsdoc-config-nick2bad4u", () => {
         expect(config.extends).not.toContain(
             "./node_modules/typedoc/tsdoc.json"
         );
-        expect(config.supportForTags?.["@throws"]).toBe(true);
-        expect(config.supportForTags?.["@defaultValue"]).toBe(true);
+        expect(config.noStandardTags).toBe(true);
+        expect(config.tagDefinitions?.map(({ tagName }) => tagName)).toContain(
+            "@defaultValue"
+        );
     });
 });
