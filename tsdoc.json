@@ -3,44 +3,33 @@
     "extends": [
         "typedoc/tsdoc.json"
     ],
-    "noStandardTags": false,
-    "supportForTags": {
-        "@beta": true,
-        "@defaultValue": true,
-        "@example": true,
-        "@internal": true,
-        "@link": true,
-        "@packageDocumentation": true,
-        "@param": true,
-        "@privateRemarks": true,
-        "@public": true,
-        "@readonly": true,
-        "@remarks": true,
-        "@returns": true,
-        "@see": true,
-        "@throws": true,
-        "@typeParam": true
-    },
+    "noStandardTags": true,
+    "supportForTags": {},
     "tagDefinitions": [
         {
             "allowMultiple": false,
             "syntaxKind": "block",
-            "tagName": "@defaultValue"
+            "tagName": "@remarks"
         },
         {
             "allowMultiple": true,
             "syntaxKind": "block",
-            "tagName": "@example"
+            "tagName": "@returns"
         },
         {
-            "allowMultiple": false,
-            "syntaxKind": "modifier",
-            "tagName": "@internal"
+            "allowMultiple": true,
+            "syntaxKind": "block",
+            "tagName": "@param"
         },
         {
-            "allowMultiple": false,
-            "syntaxKind": "modifier",
-            "tagName": "@packageDocumentation"
+            "allowMultiple": true,
+            "syntaxKind": "block",
+            "tagName": "@throws"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "block",
+            "tagName": "@see"
         },
         {
             "allowMultiple": true,
@@ -48,14 +37,49 @@
             "tagName": "@privateRemarks"
         },
         {
-            "allowMultiple": false,
+            "allowMultiple": true,
             "syntaxKind": "modifier",
             "tagName": "@readonly"
         },
         {
             "allowMultiple": true,
+            "syntaxKind": "modifier",
+            "tagName": "@beta"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "modifier",
+            "tagName": "@typeParam"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "inline",
+            "tagName": "@link"
+        },
+        {
+            "allowMultiple": true,
             "syntaxKind": "block",
-            "tagName": "@throws"
+            "tagName": "@example"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "modifier",
+            "tagName": "@public"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "modifier",
+            "tagName": "@packageDocumentation"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "modifier",
+            "tagName": "@internal"
+        },
+        {
+            "allowMultiple": false,
+            "syntaxKind": "block",
+            "tagName": "@defaultValue"
         }
     ]
 }
