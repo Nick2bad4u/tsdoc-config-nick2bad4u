@@ -1,0 +1,3 @@
+# ActionLint configuration for tsdoc-config-nick2bad4u.
+self-hosted-runner:
+    labels: []

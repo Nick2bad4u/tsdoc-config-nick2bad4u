@@ -1,0 +1,61 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+    "extends": [
+        "typedoc/tsdoc.json"
+    ],
+    "noStandardTags": false,
+    "supportForTags": {
+        "@beta": true,
+        "@defaultValue": true,
+        "@example": true,
+        "@internal": true,
+        "@link": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true
+    },
+    "tagDefinitions": [
+        {
+            "allowMultiple": false,
+            "syntaxKind": "block",
+            "tagName": "@defaultValue"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "block",
+            "tagName": "@example"
+        },
+        {
+            "allowMultiple": false,
+            "syntaxKind": "modifier",
+            "tagName": "@internal"
+        },
+        {
+            "allowMultiple": false,
+            "syntaxKind": "modifier",
+            "tagName": "@packageDocumentation"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "block",
+            "tagName": "@privateRemarks"
+        },
+        {
+            "allowMultiple": false,
+            "syntaxKind": "modifier",
+            "tagName": "@readonly"
+        },
+        {
+            "allowMultiple": true,
+            "syntaxKind": "block",
+            "tagName": "@throws"
+        }
+    ]
+}
