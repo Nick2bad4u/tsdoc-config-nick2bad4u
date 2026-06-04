@@ -23,8 +23,8 @@ describe("tsdoc-config-nick2bad4u", () => {
         );
     });
 
-    it("keeps the raw config limited to native TSDoc extension fields", async () => {
-        expect.assertions(4);
+    it("keeps the raw config native and explicit about standard tags", async () => {
+        expect.assertions(7);
 
         const config = JSON.parse(await readFile(configPath, "utf8")) as {
             readonly extends?: readonly string[];
@@ -38,11 +38,14 @@ describe("tsdoc-config-nick2bad4u", () => {
             "./node_modules/typedoc/tsdoc.json"
         );
         expect(config.noStandardTags).toBeUndefined();
+        expect(config.supportForTags?.["@param"]).toBe(true);
+        expect(config.supportForTags?.["@returns"]).toBe(true);
+        expect(config.supportForTags?.["@link"]).toBe(true);
         expect(config.tagDefinitions).toBeUndefined();
     });
 
     it("loads into a parser with standard TSDoc and TypeDoc tags", () => {
-        expect.assertions(8);
+        expect.assertions(10);
 
         const configFile = TSDocConfigFile.loadFile(configPath);
         const parserConfig = new TSDocConfiguration();
@@ -55,6 +58,8 @@ describe("tsdoc-config-nick2bad4u", () => {
 
         expect(configFile.hasErrors).toBe(false);
         expect(configFile.getErrorSummary()).toBe("No errors.");
+        expect(tagNames).toContain("@param");
+        expect(tagNames).toContain("@returns");
         expect(tagNames).toContain("@deprecated");
         expect(tagNames).toContain("@alpha");
         expect(tagNames).toContain("@sealed");
