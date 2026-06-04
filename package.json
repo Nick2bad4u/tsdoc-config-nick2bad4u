@@ -95,6 +95,8 @@
     },
     "devDependencies": {
         "@arethetypeswrong/cli": "^0.18.3",
+        "@microsoft/tsdoc": "^0.16.0",
+        "@microsoft/tsdoc-config": "^0.18.1",
         "@types/node": "^25.9.1",
         "@vitest/coverage-v8": "^4.1.8",
         "cross-env": "^10.1.0",

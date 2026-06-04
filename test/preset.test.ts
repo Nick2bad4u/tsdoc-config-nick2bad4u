@@ -1,28 +1,65 @@
+import { TSDocConfiguration } from "@microsoft/tsdoc";
+import { TSDocConfigFile } from "@microsoft/tsdoc-config";
 import { readFile } from "node:fs/promises";
+import * as path from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { configPath, packageName } from "../src/preset";
+import {
+    configFileName,
+    configPath,
+    packageName,
+    resolveConfigPath,
+} from "../src/preset";
 
 describe("tsdoc-config-nick2bad4u", () => {
-    it("exports a TSDoc config that can be extended by package path", async () => {
-        expect.assertions(5);
+    it("exports package metadata and resolves the packaged config", () => {
+        expect.assertions(4);
+
+        expect(packageName).toBe("tsdoc-config-nick2bad4u");
+        expect(configFileName).toBe("tsdoc.json");
+        expect(path.basename(configPath)).toBe(configFileName);
+        expect(resolveConfigPath(import.meta.url)).toBe(
+            path.resolve(configFileName)
+        );
+    });
+
+    it("keeps the raw config limited to native TSDoc extension fields", async () => {
+        expect.assertions(4);
 
         const config = JSON.parse(await readFile(configPath, "utf8")) as {
             readonly extends?: readonly string[];
             readonly noStandardTags?: boolean;
-            readonly tagDefinitions?: ReadonlyArray<{
-                readonly tagName: string;
-            }>;
+            readonly supportForTags?: Record<string, boolean>;
+            readonly tagDefinitions?: readonly unknown[];
         };
 
-        expect(packageName).toBe("tsdoc-config-nick2bad4u");
         expect(config.extends).toContain("typedoc/tsdoc.json");
         expect(config.extends).not.toContain(
             "./node_modules/typedoc/tsdoc.json"
         );
-        expect(config.noStandardTags).toBe(true);
-        expect(config.tagDefinitions?.map(({ tagName }) => tagName)).toContain(
-            "@defaultValue"
+        expect(config.noStandardTags).toBeUndefined();
+        expect(config.tagDefinitions).toBeUndefined();
+    });
+
+    it("loads into a parser with standard TSDoc and TypeDoc tags", () => {
+        expect.assertions(8);
+
+        const configFile = TSDocConfigFile.loadFile(configPath);
+        const parserConfig = new TSDocConfiguration();
+
+        configFile.configureParser(parserConfig);
+
+        const tagNames = parserConfig.tagDefinitions.map(
+            ({ tagName }) => tagName
         );
+
+        expect(configFile.hasErrors).toBe(false);
+        expect(configFile.getErrorSummary()).toBe("No errors.");
+        expect(tagNames).toContain("@deprecated");
+        expect(tagNames).toContain("@alpha");
+        expect(tagNames).toContain("@sealed");
+        expect(tagNames).toContain("@defaultValue");
+        expect(tagNames).toContain("@category");
+        expect(tagNames).toContain("@linkcode");
     });
 });
