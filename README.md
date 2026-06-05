@@ -14,8 +14,9 @@ enabled and layers TypeDoc's documented tag definitions on top.
 npm install --save-dev tsdoc-config-nick2bad4u @microsoft/tsdoc-config
 ```
 
-TypeDoc users should already have TypeDoc installed in the consuming project.
-This shared config extends TypeDoc's packaged `typedoc/tsdoc.json`.
+This shared config depends on TypeDoc so TypeDoc's packaged `typedoc/tsdoc.json`
+resolves for ESLint-only consumers too. Install TypeDoc directly in the
+consuming project only when that project invokes the TypeDoc CLI.
 
 ## Usage
 

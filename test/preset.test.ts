@@ -12,6 +12,24 @@ import {
 } from "../src/preset";
 
 describe("tsdoc-config-nick2bad4u", () => {
+    it("ships TypeDoc as a runtime dependency for native extends resolution", async () => {
+        expect.assertions(3);
+
+        const packageJson = JSON.parse(
+            await readFile(path.resolve("package.json"), "utf8")
+        ) as {
+            readonly dependencies?: Record<string, string>;
+            readonly devDependencies?: Record<string, string>;
+            readonly peerDependencies?: Record<string, string>;
+        };
+
+        expect(packageJson.dependencies?.["typedoc"]).toMatch(/^\^0\.28\./v);
+        expect(packageJson.devDependencies?.["typedoc"]).toBeUndefined();
+        expect(packageJson.peerDependencies?.["@microsoft/tsdoc-config"]).toBe(
+            ">=0.18.0"
+        );
+    });
+
     it("exports package metadata and resolves the packaged config", () => {
         expect.assertions(4);
 

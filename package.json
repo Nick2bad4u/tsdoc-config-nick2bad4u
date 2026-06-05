@@ -88,6 +88,9 @@
         "update-deps": "npx ncu -i --install never && npm update --force && npm install --force && npm run sync:node-version-files",
         "verify": "npm run release:verify"
     },
+    "dependencies": {
+        "typedoc": "^0.28.19"
+    },
     "devDependencies": {
         "@arethetypeswrong/cli": "^0.18.3",
         "@microsoft/tsdoc": "^0.16.0",
@@ -111,7 +114,6 @@
         "secretlint": "^13.0.2",
         "secretlint-config-nick2bad4u": "^1.1.0",
         "sort-package-json": "^4.0.0",
-        "typedoc": "^0.28.19",
         "typedoc-config-nick2bad4u": "^1.0.0",
         "typescript": "^6.0.3",
         "vite": "^8.0.16",
